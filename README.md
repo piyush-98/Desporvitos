@@ -1,6 +1,6 @@
 # Desportivos
 
-### Game oasis Hackathon 
+### Game Oasis Hackathon 
 
 ### Our Solution
 No power to people as the fantasy apps tend to cut the middlemen fees for every transaction. No choice to create personalised fantasy game for others. Lesser options to have variety in fantasy apps. 3 options for people: Integer voting, MCQ voting and Play Along. Content (questions) can be created by anyone with any participation fees and participants they want. Our backend NLP algorithms predict the output based on live feed's output dynamically without any human intervention.
