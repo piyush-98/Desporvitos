@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".MainActivity"
+    tools:showIn="@layout/activity_main">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="70dp">
+
+        <HorizontalScrollView
+            android:id="@+id/rlh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true">
+
+            <LinearLayout
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:background="@color/colorredmenu"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <LinearLayout
+                    android:id="@+id/fc"
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/grey_100"
+                    android:orientation="vertical">
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:foregroundGravity="center_horizontal"
+                        android:padding="5dp"
+                        android:text="3rd Test: South Africa Tour of India, 2019"
+                        android:textSize="13sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="12dp">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="50dp"
+                            android:src="@mipmap/indianflag" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="29dp"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center_vertical|start"
+                            android:paddingStart="10dp"
+                            android:text="IND           22/0"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="12dp">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="50dp"
+                            android:src="@mipmap/flagsa" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="29dp"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center_vertical|start"
+                            android:paddingStart="10dp"
+                            android:text="RSA"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/clickc"
+                        android:layout_width="match_parent"
+                        android:layout_height="33dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/grey_300"
+                        android:gravity="fill_vertical|end"
+                        android:paddingEnd="15dp"
+                        android:text="PLAY LIVE"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textSize="13sp" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/fc2"
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/grey_100"
+                    android:orientation="vertical">
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:foregroundGravity="center_horizontal"
+                        android:padding="5dp"
+                        android:text="Vijay Hazare Trophy India, 2019"
+                        android:textSize="13sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="12dp">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="50dp"
+                            android:src="@mipmap/indianflag" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="29dp"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center_vertical|start"
+                            android:paddingStart="10dp"
+                            android:text="MUM          288/6"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="12dp">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="50dp"
+                            android:src="@mipmap/indianflag" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="29dp"
+                            android:layout_marginTop="10dp"
+
+                            android:gravity="center_vertical|start"
+                            android:paddingStart="10dp"
+                            android:text="JK     "
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/clickc2"
+                        android:layout_width="match_parent"
+                        android:layout_height="33dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/grey_300"
+                        android:gravity="fill_vertical|end"
+                        android:paddingEnd="15dp"
+
+                        android:text="PLAY LIVE"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textSize="13sp" />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <TextView
+            android:id="@+id/tq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlh"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:text="TRENDING QUESTIONS:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="15sp" />
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="1000dp"
+            android:layout_below="@+id/tq"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="1dp"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            android:outlineProvider="none"
+
+            android:paddingLeft="7dp"
+            android:paddingRight="7dp"
+            android:scrollbars="none"
+            android:transcriptMode="normal" />
+    </RelativeLayout>
+</ScrollView>
