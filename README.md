@@ -16,3 +16,13 @@ https://docs.google.com/presentation/d/1a_rmL6ZbJzG6QF8tK8jhEBA6mRZ-FOvk6LbAMXx2
 
 https://cos.tv/videos/play/1572200813908388389
 https://drive.google.com/file/d/1OTkgdiXtTVSbizPFetTKGPlMgTNsmi8S/view?usp=drivesdk
+
+
+### Steps to follow after downloading app:
+
+1. Go to sign in screen (Account icon on top right) and write any account names ( gameoasisacc1,gameoasisacc2,gameoasisacc3,gameoasisacc4 or gameoasisacc5 ) and no need to write private key.
+2. Now you can create a question from main screen (by + button at bottom right)
+3. You can participate and submit any solution to any question. (It might not work if answer for same question is already submitted by same account name)
+4. After creating question or participating you actually can verify it on blockchain as Snackbar pops up. You can view the tables.
+
+Enjoy:)
