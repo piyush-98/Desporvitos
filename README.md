@@ -12,9 +12,13 @@ No power to people as the fantasy apps tend to cut the middlemen fees for every 
 https://docs.google.com/presentation/d/1a_rmL6ZbJzG6QF8tK8jhEBA6mRZ-FOvk6LbAMXx2byw/edit?usp=sharing
 
 
-### NLP and Cricket API Video:
+### APP Demo Video:
 
 https://cos.tv/videos/play/1572200813908388389
+
+
+### NLP and Cricket API Video:
+
 https://drive.google.com/file/d/1OTkgdiXtTVSbizPFetTKGPlMgTNsmi8S/view?usp=drivesdk
 
 
