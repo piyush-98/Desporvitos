@@ -1,9 +1,13 @@
-# Desportivos
+# Desportivos : Decentralised Sports Fantasy
 
 ### Game Oasis Hackathon 
 
 ### Our Solution
-No power to people as the fantasy apps tend to cut the middlemen fees for every transaction. No choice to create personalised fantasy game for others. Lesser options to have variety in fantasy apps. 3 options for people: Integer voting, MCQ voting and Play Along. Content (questions) can be created by anyone with any participation fees and participants they want. Our backend NLP algorithms predict the output based on live feed's output dynamically without any human intervention.
+Lesser power to people as the fantasy apps tend to cut the middlemen fees for every transaction. No choice to create personalised fantasy game for others. Lesser options to have variety in fantasy apps. 3 options for people: Integer voting, MCQ voting and Play Along. Content (questions) can be created by anyone with any participation fees and participants they want. Our backend NLP algorithms predict the output based on live feed's output dynamically without any human intervention.
+
+Our aim is to give power to people so that they collabarate and win. No third part is required and everything remains transparent.
+
+We chose cricket as our main area as it is highly unpredictable and worth billions of dollars market in India with seamless fan following. 
 
 
 
