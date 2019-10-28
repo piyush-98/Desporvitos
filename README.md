@@ -13,7 +13,7 @@ We chose cricket as our main area as it is highly unpredictable and worth billio
 
 ### Presentation:
 
-https://docs.google.com/presentation/d/1a_rmL6ZbJzG6QF8tK8jhEBA6mRZ-FOvk6LbAMXx2byw/edit?usp=sharing
+https://bit.ly/2BMpvOC
 
 
 ### APP Demo Video:
@@ -23,7 +23,8 @@ https://cos.tv/videos/play/1572200813908388389
 
 ### NLP and Cricket API Video:
 
-https://bit.ly/2BMpvOC
+
+https://bit.ly/34a09pY
 
 
 ### Steps to follow after downloading app:
