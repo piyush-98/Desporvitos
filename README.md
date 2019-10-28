@@ -13,7 +13,7 @@ We chose cricket as our main area as it is highly unpredictable and worth billio
 
 ### Presentation:
 
-https://bit.ly/2BMpvOC
+https://bit.ly/2BKVq1N
 
 
 ### APP Demo Video:
