@@ -23,7 +23,7 @@ https://cos.tv/videos/play/1572200813908388389
 
 ### NLP and Cricket API Video:
 
-https://drive.google.com/file/d/1OTkgdiXtTVSbizPFetTKGPlMgTNsmi8S/view?usp=drivesdk
+https://bit.ly/2BMpvOC
 
 
 ### Steps to follow after downloading app:
