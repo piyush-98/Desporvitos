@@ -1,0 +1,77 @@
+{
+  "project_info": {
+    "project_number": "211176160609",
+    "firebase_url": "https://geographicindicationspl.firebaseio.com",
+    "project_id": "geographicindicationspl",
+    "storage_bucket": "geographicindicationspl.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:211176160609:android:7f11f535dc7b603072d920",
+        "android_client_info": {
+          "package_name": "com.example.jaspreet.sportsfest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "211176160609-7mvekj9s2acs2o07gm4hjqpqe1s23r3d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsrEH1Mxv9IwmYb49YcXSLsmJu5JcxVD0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "211176160609-7mvekj9s2acs2o07gm4hjqpqe1s23r3d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:211176160609:android:52e67547f524e228",
+        "android_client_info": {
+          "package_name": "com.jskgmail.geographicindicationspl"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "211176160609-6ipq5q6s556qmc0jts38sk41md4ung34.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jskgmail.geographicindicationspl",
+            "certificate_hash": "4dd6f8c676ed528cf639a2785aec3fefd2c7c09f"
+          }
+        },
+        {
+          "client_id": "211176160609-7mvekj9s2acs2o07gm4hjqpqe1s23r3d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsrEH1Mxv9IwmYb49YcXSLsmJu5JcxVD0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "211176160609-7mvekj9s2acs2o07gm4hjqpqe1s23r3d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

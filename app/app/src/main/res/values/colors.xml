@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#720D5D</color>
+    <color name="colorPrimaryDark">#430033</color>
+    <color name="colorAccent">#E30425</color>
+    <color name="colorred">#c73838</color>
+    <color name="colorredmenu">#e4e4e4</color>
+    <color name="colorredlo">#f15761</color>
+    <color name="grey_100">#f5f5f5</color>
+    <color name="grey_300">#DCDCDC</color>
+    <color name="green_300">#8fbc8f</color>
+    <color name="colorPrimarylight">#a30f8a</color>
+
+    <color name="white">#fbfbfb</color>
+    <color name="black">#000000</color>
+    <color name="input_background">#F2F1F1</color>
+    <color name="nav_header_titleText">#FFFFFF</color>
+
+</resources>
+
