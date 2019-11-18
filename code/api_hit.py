@@ -1,13 +1,25 @@
 from pycricbuzz import Cricbuzz
 import json
 import requests
-df = pd.read_pickle("data.pickle")
-ls=(df.iloc[1].isnull())
-def scorecard():
-    url="http://mapps.cricbuzz.com/cbzios/match/22977/scorecard.json"
+import pyrebase
+
+def scorecard(mid):
+    url="http://mapps.cricbuzz.com/cbzios/match/{}/scorecard.json".format(mid)
     res=(requests.get(url))
     data=(json.loads(res.text))
-    return data
+    return(data)
+def id_gen(name):###
+    return "1394"
+def match_info(mid):
+    url="http://mapps.cricbuzz.com/cbzios/match/{}".format(mid)
+    res=(requests.get(url))
+    data=(json.loads(res.text))
+    return(data)
+def max_over_gen(mid):
+    data=match_info(mid)
+    match_type=(data["header"]["type"])
+    if match_type=="T20":
+        return 20
 def valid_bat(id):
     data=scorecard()
     s=(data["Innings"][0]['next_batsman'])## nextbatsman
@@ -18,11 +30,16 @@ def valid_bat(id):
         return ind
     else:
         return -1
+def valid_Team_over(over):
+    data=scorecard()
+    if float(data["Innings"][0]['ovr'])>float(over):
+        return -1
+
 def valid_bat_over(id,over):
     data=scorecard()
     s=(data["Innings"][0]['next_batsman'])## nextbatsman
     s=s.split(",")
-    if data["Innings"][0]['ovr']<over:
+    if float(data["Innings"][0]['ovr'])<float(over):
         if id in s:
             valid=True
             ind=s.index(id)
@@ -87,30 +104,24 @@ def bowlers_wickets(id,max_ovr):
         for i in (data["Innings"][0]['bowlers']):
             if i['id']==id:
                 return(i['w'])
-# def bowlers_maidens(id,max_ovr):
-#     data=scorecard()
-#     if data["Innings"][0]['ovr']==max_ovr:
-#         for i in (data["Innings"][0]['bowlers']):
-#             if i['id']==id:
-#                 return(i['m'])
-# def bowlers_nb(id,max_ovr):
-#     data=scorecard()
-#     if data["Innings"][0]['ovr']==max_ovr:
-#         for i in (data["Innings"][0]['bowlers']):
-#             if i['id']==id:
-#                 return(i['n'])
-# def bowlers_wide(id,max_ovr):
-#     data=scorecard()
-#     if data["Innings"][0]['ovr']==max_ovr:
-#         for i in (data["Innings"][0]['bowlers']):
-#             if i['id']==id:
-#                 return(i['n'])
-# def bowlers_runs(id,max_ovr):
-#     data=scorecard()
-#     if data["Innings"][0]['ovr']==max_ovr:
-#         for i in (data["Innings"][0]['bowlers']):
-#             if i['id']==id:
-#                 return(i['r'])
+def bowlers_maidens(id,max_ovr):
+    data=scorecard()
+    if data["Innings"][0]['ovr']==max_ovr:
+        for i in (data["Innings"][0]['bowlers']):
+            if i['id']==id:
+                return(i['m'])
+def bowlers_nb(id,max_ovr):
+    data=scorecard()
+    if data["Innings"][0]['ovr']==max_ovr:
+        for i in (data["Innings"][0]['bowlers']):
+            if i['id']==id:
+                return(i['n'])
+def bowlers_wide(id,max_ovr):
+    data=scorecard()
+    if data["Innings"][0]['ovr']==max_ovr:
+        for i in (data["Innings"][0]['bowlers']):
+            if i['id']==id:
+                return(i['n'])
 def batsman_over(id,over,runs_prev):
     data=scorecard()
     if float(data["Innings"][0]['ovr'])==float(over)-1:
@@ -129,3 +140,13 @@ def batsman_over(id,over,runs_prev):
                 return (runs_cur-runs_prev)
     else:
         batsman_over(id,over,runs_prev)
+def Team_run(over,runs_prev):
+        data=scorecard()
+        if float(data["Innings"][0]['ovr'])==float(over)-1:
+            runs_prev=data["Innings"][0]['batsmen']
+            Team_run(over,runs_prev)
+        elif (data["Innings"][0]['ovr'])==(over):
+            runs_cur=data["Innings"][0]['batsmen']
+            return (runs_cur-runs_prev)
+        else:
+            Team_run(over,runs_prev)
