@@ -1,21 +1,26 @@
-import pyrebase
-config = {
-  "apiKey": "apiKey",
-  "authDomain":"geographicindicationspl.firebaseapp.com" ,
-  "databaseURL": "https://geographicindicationspl.firebaseio.com/",
-  "storageBucket":"geographicindicationspl.appspot.com/",
-  #"serviceAccount": "path/to/serviceAccountCredentials.json"
-}
-
-firebase = pyrebase.initialize_app(config)
-#storage.child("example.jpeg").put("thumbDiv.jpeg")
-db = firebase.database()
-#db.child("users").set({1:"example.jpeg"})
-users = db.child("Questions/CRICKET").get()
-dlink=users.val()
-key=[]
-for i in dlink:
-    key.append(i)
-q_id=key[-1]
-question=(dlink[q_id]['content'])
-print(question)
+import requests
+import json
+def match_info(mid):
+    url="http://mapps.cricbuzz.com/cbzios/match/{}".format(mid)
+    res=(requests.get(url))
+    data=(json.loads(res.text))
+    player_ids=(data["team1"]['squad'])
+    player_ids+=(data["team2"]['squad'])
+    waste=[]
+    waste=data["team1"]['squad_bench']
+    waste+=(data["team2"]['squad_bench'])
+    names=[]
+    c=-1
+    for i in data['players']:
+        if int(i['id']) in waste:
+            continue
+        else:
+            names.append((i['f_name'],i['name']))
+    name='Iftikhar Ahmed'
+    for i in names:
+        c+=1
+        for j in i:
+            if name==j:
+                print(player_ids[c])
+                break
+match_info("22579")
