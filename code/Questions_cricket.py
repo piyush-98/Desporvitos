@@ -374,7 +374,7 @@ def Batsmen_runs(id,max_ovr,mid): ##batsman id
                         data=scorecard(mid)
             result=Batsmen_cur(ind,data)
             return result
-        elif data float(["Innings"][0]['ovr'])==float(max_ovr): #not playing but finished
+        elif float(data["Innings"][0]['ovr'])==float(max_ovr): #not playing but finished
             return -1 ## INVALID
         else:
             time.sleep(20)
