@@ -81,8 +81,8 @@ def Data_app():
 def Q_analsys(s,q_id):
     print(s)
     Data_make()
-    st = StanfordNERTagger('C:/Users/PIYUSH/Downloads/stanford-ner-2018-10-16/classifiers/english.all.3class.distsim.crf.ser.gz',
-    					   'C:/Users/PIYUSH/Downloads/stanford-ner-2018-10-16/stanford-ner.jar',
+    st = StanfordNERTagger('C:/Users/PIYUSH/Desktop/Desportivos/code/english.all.3class.distsim.crf.ser.gz',
+    					   'C:/Users/PIYUSH/Desktop/Desportivos/code/stanford-ner.jar',
     					   encoding='utf-8')
     tokenized_text = word_tokenize(s)
     classified_text = st.tag(tokenized_text)
