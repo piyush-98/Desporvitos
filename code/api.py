@@ -1,16 +1,40 @@
-# from nltk.tag import StanfordNERTagger
-# from nltk.tokenize import word_tokenize
-# st = StanfordNERTagger('C:/Users/PIYUSH/Downloads/stanford-ner-2018-10-16/classifiers/english.all.3class.distsim.crf.ser.gz',
-# 					   'C:/Users/PIYUSH/Downloads/stanford-ner-2018-10-16/stanford-ner.jar',
-# 					   encoding='utf-8')
-# text ='How many runs will Northern Warriors score in 20th overe'
-# tokenized_text = word_tokenize(text)
-# classified_text = st.tag(tokenized_text)
-# print(classified_text)
-# stan_ent=[]
-# for i in classified_text:
-# 	if i[1]!='O':
-# 		stan_ent.append(i[1])
-# print(stan_ent)
-result='20.0'
-print(int(result[0:len(result)-2]))
+import requests
+import json
+def scorecard(mid):
+    url="http://mapps.cricbuzz.com/cbzios/match/{}/scorecard.json".format(mid)
+    res=(requests.get(url))
+    data=(json.loads(res.text))
+    return(data)
+def match_info(mid):
+    url="http://mapps.cricbuzz.com/cbzios/match/{}".format(mid)
+    res=(requests.get(url))
+    data=(json.loads(res.text))
+    return(data)
+def id_gen(p_name,mid):
+    data=match_info(mid)
+    player_ids=(data["team1"]['squad'])
+    player_ids+=(data["team2"]['squad'])
+    waste=[]
+    waste=data["team1"]['squad_bench']
+    waste+=(data["team2"]['squad_bench'])
+    names=[]
+    c=-1
+    p_id=0
+    for i in data['players']:
+        if int(i['id']) in waste:
+            continue
+        else:
+            names.append((i['f_name'],i['name']))
+    for i in names:
+        c+=1
+        for j in i:
+            if p_name==j:
+                p_id=player_ids[c]
+                return str(p_id)
+    if p_id==0:
+        return -1
+
+print((id_gen("Mushfiqur Rahim","22750")))
+data=scorecard("22750")
+if(data["Innings"][0]['batsmen'][7]['out_desc'])!="batting":
+    print("asdfbgvfewsfghfdsa")

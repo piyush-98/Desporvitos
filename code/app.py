@@ -283,6 +283,11 @@ def scorecard(mid):
     res=(requests.get(url))
     data=(json.loads(res.text))
     return(data)
+def match_info(mid):
+    url="http://mapps.cricbuzz.com/cbzios/match/{}".format(mid)
+    res=(requests.get(url))
+    data=(json.loads(res.text))
+    return(data)
 def id_gen(p_name,mid):
     data=match_info(mid)
     player_ids=(data["team1"]['squad'])
@@ -303,17 +308,10 @@ def id_gen(p_name,mid):
         for j in i:
             if p_name==j:
                 p_id=player_ids[c]
-                return p_id
+                return str(p_id)
     if p_id==0:
         return -1
 
-
-
-def match_info(mid):
-    url="http://mapps.cricbuzz.com/cbzios/match/{}".format(mid)
-    res=(requests.get(url))
-    data=(json.loads(res.text))
-    return(data)
 def max_over_gen(mid):
     #data=match_info(mid)
     return "500"
@@ -338,10 +336,16 @@ def valid_bat_over(id,over,mid):
     ls=[]
     for j in (data["Innings"][0]['batsmen']):
         ls.append(j['id'])
+    print(id)
     if float(data["Innings"][0]['ovr'])<float(over):
+        print("ww")
         if id in ls:
+            print("qq")
+            print(ls)
             ind=ls.index(id)
-            if data["Innings"][0]['batsmen'][ind]['out_desc']!="batting" or data["Innings"][0]['batsmen'][ind]['out_desc']!="not out":
+            print(ind)
+            if data["Innings"][0]['batsmen'][ind]['out_desc']!="batting":
+                print("cc")
                 return -1
             else:
                 return 2
@@ -476,7 +480,7 @@ def Batsman_over(id,over,runs_prev,mid):
                         data=scorecard(mid)
                         if float(data["Innings"][0]['ovr'])==float(over)-1:
                             print("oo")
-                            if data["Innings"][0]['batsmen'][ind]['out_desc']!="not out" or data["Innings"][0]['batsmen'][ind]['out_desc']!="batting":
+                            if data["Innings"][0]['batsmen'][ind]['out_desc']!="batting":
                                 return -1
                             else:
                                 print("ll")
@@ -485,10 +489,11 @@ def Batsman_over(id,over,runs_prev,mid):
                         elif float(data["Innings"][0]['ovr'])==float(over):
                             print("ww")
                             runs_cur=data["Innings"][0]['batsmen'][ind]['r']
-                            return (runs_cur-runs_prev)
+                            return str(float(runs_cur)-float(runs_prev))
                         else:
                             continue
-                Batsman_found(ind,over,runs_prev)
+                result=Batsman_found(ind,over,runs_prev)
+                return result
         else:
             time.sleep(5)
 def Team_run(over,runs_prev,mid):
@@ -540,6 +545,7 @@ def decision(mid,q_id,db,dlink):
                 over=df.iloc[index]["Over"]
                 id=id_gen(name,mid)
                 if id==-1:
+                    print("b")
                     return -1
                 if valid_bat_over(id,over,mid)==-1:
                     return-1
@@ -554,6 +560,7 @@ def decision(mid,q_id,db,dlink):
                         return Batsmen_six_over(id,over,mid)
                     else:
                         max_ovr=max_over_gen(mid)
+                        print(id)
                         return Batsman_over(id,over,-1,mid)
         elif i==3:
             name=df.iloc[index]["Bowler"]
