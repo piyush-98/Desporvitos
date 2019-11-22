@@ -36,7 +36,7 @@ pandocfilters==1.4.2
 
 pickleshare==0.7.5
 
-Pillow==5.4.1
+Pillow==6.2.0
 
 plac==1.1.3
 
