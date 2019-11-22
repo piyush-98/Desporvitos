@@ -25,11 +25,13 @@ import pyrebase
 import time
 from nltk.tag import StanfordNERTagger
 from nltk.tokenize import word_tokenize
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import db
 
 
-def main():
-    while(True):
-        config = {
+def main(event):
+    config = {
           "apiKey": "apiKey",
           "authDomain":"geographicindicationspl.firebaseapp.com" ,
           "databaseURL": "https://geographicindicationspl.firebaseio.com/",
@@ -37,36 +39,34 @@ def main():
           #"serviceAccount": "path/to/serviceAccountCredentials.json"
         }
 
-        firebase = pyrebase.initialize_app(config)
+    firebase = pyrebase.initialize_app(config)
         #storage.child("example.jpeg").put("thumbDiv.jpeg")
-        db = firebase.database()
+    db = firebase.database()
         #db.child("users").set({1:"example.jpeg"})
-        users = db.child("Questions/CRICKET").get()
-        dlink=users.val()
-        key=[]
-        for i in dlink:
-            key.append(i)
-        q_id=key[-1]
-        print(q_id)
-        question=(dlink[q_id]['content'])
-        match_id=(dlink[q_id]['matchid'])
-        df=Q_analsys(question,q_id)
-        result=decision(match_id,q_id,db,dlink)
-        print(result)
-        if result==-1:
-            u="Questions/CRICKET/".format(q_id)
-            print(u)
-            db.child(u).child(q_id).update({"reviewed":"-1"})
-        else:
-            u="Questions/CRICKET/".format(q_id)
-            print(u)
-            db.child(u).child(q_id).update({"reviewed":"2"})
-            url="https://enigmatic-hamlet-61462.herokuapp.com/submitSolution/{}/{}".format(int(q_id),int(result[0:len(result)-2]))
-            res=requests.get(url)
-            hash_i=(res.text)
-            print(hash_i)
-        time.sleep(5000)
-
+    users = db.child("Questions/CRICKET").get()
+    dlink=users.val()
+    key=[]
+    for i in dlink:
+        key.append(i)
+    q_id=key[-1]
+    print(q_id)
+    question=(dlink[q_id]['content'])
+    match_id=(dlink[q_id]['matchid'])
+    df=Q_analsys(question,q_id)
+    result=decision(match_id,q_id,db,dlink)
+    print(result)
+    if result==-1:
+        u="Questions/CRICKET/".format(q_id)
+        print(u)
+        db.child(u).child(q_id).update({"reviewed":"-1"})
+    else:
+        u="Questions/CRICKET/".format(q_id)
+        print(u)
+        db.child(u).child(q_id).update({"reviewed":"2"})
+        url="https://enigmatic-hamlet-61462.herokuapp.com/submitSolution/{}/{}".format(int(q_id),int(result[0:len(result)-2]))
+        res=requests.get(url)
+        hash_i=(res.text)
+        print(hash_i)
 def Data_make():
     columns=['q_id', 'Team','Over', 'Bowler', 'Batsmen', 'Bow_wickets',
            'Maiden', 'Wide', 'Noball', 'Team_win', 'Team_run', 'Team_wickets',
@@ -344,10 +344,10 @@ def valid_bat_over(id,over,mid):
             if data["Innings"][0]['batsmen'][ind]['out_desc']!="batting" or data["Innings"][0]['batsmen'][ind]['out_desc']!="not out":
                 return -1
             else:
-                return ind
+                return 2
 
         else:
-            return ind
+            return 2
     else:
         return -1
 
@@ -461,19 +461,25 @@ def bowlers_wide(id,max_ovr,mid):
 def Batsman_over(id,over,runs_prev,mid):
     while(True):
         data=scorecard(mid)
-        if float(data["Innings"][0]['ovr'])==float(over)-1:
-            ls=[]
-            for j in (data["Innings"][0]['batsmen']):
-                ls.append(j['id'])
-            if id in ls:
+        print("xx")
+        print(float(data["Innings"][0]['ovr']))
+        print(float(over)-1)
+        ls=[]
+        for j in (data["Innings"][0]['batsmen']):
+            ls.append(j['id'])
+        if id in ls:
+                print("mm")
                 ind=ls.index(id)
+
                 def Batsman_found(ind,over,runs_prev):
                     while(True):
                         data=scorecard(mid)
                         if float(data["Innings"][0]['ovr'])==float(over)-1:
+                            print("oo")
                             if data["Innings"][0]['batsmen'][ind]['out_desc']!="not out" or data["Innings"][0]['batsmen'][ind]['out_desc']!="batting":
                                 return -1
                             else:
+                                print("ll")
                                 runs_prev=data["Innings"][0]['batsmen'][ind]['r']
                                 time.sleep(20)
                         elif float(data["Innings"][0]['ovr'])==float(over):
@@ -482,10 +488,9 @@ def Batsman_over(id,over,runs_prev,mid):
                             return (runs_cur-runs_prev)
                         else:
                             continue
-            else:
-                time.sleep(20)
+                Batsman_found(ind,over,runs_prev)
         else:
-            time.sleep(20)
+            time.sleep(5)
 def Team_run(over,runs_prev,mid):
     print("jjj")
     while(True):
@@ -543,12 +548,13 @@ def decision(mid,q_id,db,dlink):
                     print(u)
                     db.child(u).child(q_id).update({"reviewed":"1"})
                     if 11 in ls:
-                        return Batsmen_bound_over(id,max_ovr,mid)
+                        over=df.iloc[index]["Over"]
+                        return Batsmen_bound_over(id,over,mid)
                     elif 12 in ls:
-                        return Batsmen_six_over(id,max_ovr,mid)
+                        return Batsmen_six_over(id,over,mid)
                     else:
                         max_ovr=max_over_gen(mid)
-                        return Batsman_over(id,max_ovr,-1,mid)
+                        return Batsman_over(id,over,-1,mid)
         elif i==3:
             name=df.iloc[index]["Bowler"]
             id=id_gen(name)
@@ -582,12 +588,24 @@ def decision(mid,q_id,db,dlink):
                 print(u)
                 db.child(u).child(q_id).update({"reviewed":"1"})
                 if 11 in ls:
+                    max_ovr=max_over_gen(mid)
                     Batsmen_bound(id,max_ovr,mid)
                 elif 12 in ls:
+                    max_ovr=max_over_gen(mid)
                     Batsmen_six(id,max_ovr,mid)
                 else:
-                    print("ss")
+                    max_ovr=max_over_gen(mid)
                     Batsmen_runs(id,max_ovr,mid)
         else:
             continue
-main()
+
+config = {
+          "apiKey": "apiKey",
+          "authDomain":"geographicindicationspl.firebaseapp.com" ,
+          "databaseURL": "https://geographicindicationspl.firebaseio.com/",
+          "storageBucket":"geographicindicationspl.appspot.com/",
+          #"serviceAccount": "path/to/serviceAccountCredentials.json"
+          }
+cred = credentials.Certificate("C:/Users/PIYUSH/Desktop/Desportivos/code/geographicindicationspl-firebase-adminsdk-fs115-869a219ea1.json")
+firebase_admin.initialize_app(cred,options=config)
+firebase_admin.db.reference('Questions/CRICKET').listen(main)
