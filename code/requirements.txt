@@ -48,7 +48,7 @@ pycricbuzz==2.4
 
 request==2018.11.20
 
-requests==2.11.1
+requests==2.20.0
 
 requests-oauthlib==1.0.0
 
