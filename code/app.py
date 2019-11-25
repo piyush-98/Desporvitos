@@ -279,7 +279,7 @@ class asknplay:
 
     def max_over_gen(self,mid):
         #data=match_info(mid)
-        return "500"
+        return "20"
     def valid_bat(self,id,mid):
         data=self.scorecard(mid)
         s=(data["Innings"][0]['next_batsman'])## nextbatsman
@@ -321,7 +321,6 @@ class asknplay:
             return -1
 
     def Batsmen_runs(self,id,max_ovr,mid): ##batsman id
-        while(True):
             data=self.scorecard(mid)
             ls=[]
             for j in (data["Innings"][0]['batsmen']):
@@ -331,26 +330,23 @@ class asknplay:
                 print("ssss")
                 ind=ls.index(id)
                 def Batsmen_cur(ind,data):
-                    while(True):
                         #batsmen is playing or have been dismissed
-                        if data["Innings"][0]['batsmen'][ind]['out_desc']!="not out": ## dismissed
-                            return(i['r'])
-                        elif data["Innings"][0]['ovr']==max_ovr:
-                            return(i['r'])
+                        if data["Innings"][0]['batsmen'][ind]['out_desc']!="batting": ## dismissed
+                            return(data["Innings"][0]['batsmen'][ind]['r'])
+                        elif data["Innings"][0]['ovr']==max_ovr or data['state']=="complete":
+                            print("favour")
+                            return(data["Innings"][0]['batsmen'][ind]['r'])
 
                         else:
-                            time.sleep(20)
-                            data=scorecard(mid)
+                            return "Not applicable"
                 result=Batsmen_cur(ind,data)
                 return result
-            elif float(data["Innings"][0]['ovr'])==float(max_ovr): #not playing but finished
+            elif float(data["Innings"][0]['ovr'])==float(max_ovr) or data['state']=="complete":#not playing but finished
                 return -1 ## INVALID
             else:
-                time.sleep(20)
-                continue
+                return "Not applicable"
 
     def Batsmen_bound(self,id,max_ovr,mid): ##batsman id
-        while(True):
             data=self.scorecard(mid)
             ls=[]
             for j in (data["Innings"][0]['batsmen']):
@@ -358,26 +354,22 @@ class asknplay:
             if id in ls:
                 ind=ls.index(id)
                 def Batsmen_cur(ind,data):
-                    while(True):
                         #batsmen is playing or have been dismissed
-                        if data["Innings"][0]['batsmen'][ind]['out_desc']!="not out": ## dismissed
-                            return(i['4s'])
-                        elif data["Innings"][0]['ovr']==max_ovr:
-                            return(i['4s'])
-
+                        if data["Innings"][0]['batsmen'][ind]['out_desc']!="batting": ## dismissed
+                            return(data["Innings"][0]['batsmen'][ind]['4s'])
+                        elif float(data["Innings"][0]['ovr'])==float(max_ovr) or data['state']=="complete":
+                            print("favour")
+                            return(data["Innings"][0]['batsmen'][ind]['4s'])
                         else:
-                            time.sleep(20)
-                            data=scorecard(mid)
+                            return "Not applicable"
                 result=Batsmen_cur(ind,data)
                 return result
-            elif data["Innings"][0]['ovr']==max_ovr: #not playing but finished
+            elif data["Innings"][0]['ovr']==max_ovr or data['state']=="complete": #not playing but finished
                 return -1 ## INVALID
             else:
-                time.sleep(20)
-                continue
+                return "Not applicable"
 
     def Batsmen_six(self,id,max_ovr,mid):
-        while(True):
             data=self.scorecard(mid)
             ls=[]
             for j in (data["Innings"][0]['batsmen']):
@@ -385,53 +377,47 @@ class asknplay:
             if id in ls:
                 ind=ls.index(id)
                 def Batsmen_cur(ind,data):
-                    while(True):
                         #batsmen is playing or have been dismissed
-                        if data["Innings"][0]['batsmen'][ind]['out_desc']!="not out": ## dismissed
-                            return(i['6s'])
-                        elif data["Innings"][0]['ovr']==max_ovr:
-                            return(i['6s'])
+                        if data["Innings"][0]['batsmen'][ind]['out_desc']!="batting":
+                            return(data["Innings"][0]['batsmen'][ind]['6s'])
+                        elif float(data["Innings"][0]['ovr'])==float(max_ovr) or data['state']=="complete":
+                            return(data["Innings"][0]['batsmen'][ind]['6s'])
 
                         else:
-                            time.sleep(20)
-                            data=scorecard(mid)
+                            return "Not applicable"
                 result=Batsmen_cur(ind,data)
                 return result
-            elif data["Innings"][0]['ovr']==max_ovr: #not playing but finished
+            elif data["Innings"][0]['ovr']==max_ovr or data['state']=="complete": #not playing but finished
                 return -1 ## INVALID
             else:
-                time.sleep(20)
-                continue
+                return "Not applicable"
 
     def bowlers_wickets(self,id,max_ovr,mid):
-        while(True):
-            data=self.scorecard(mid)
-            if data["Innings"][0]['ovr']==max_ovr:
-                for i in (data["Innings"][0]['bowlers']):
-                    if i['id']==id:
-                        return(i['w'])
+        data=self.scorecard(mid)
+        if float(data["Innings"][0]['ovr'])==float(max_ovr) or data['state']=="complete":
+            for i in (data["Innings"][0]['bowlers']):
+                if i['id']==id:
+                    print(i['w'])
+                    return(i['w'])
 
     def bowlers_maidens(self,id,max_ovr,mid):
-        while(True):
-            data=self.scorecard(mid)
-            if data["Innings"][0]['ovr']==max_ovr:
-                for i in (data["Innings"][0]['bowlers']):
-                    if i['id']==id:
-                        return(i['m'])
+        data=self.scorecard(mid)
+        if float(data["Innings"][0]['ovr'])==float(max_ovr)or data['state']=="complete":
+            for i in (data["Innings"][0]['bowlers']):
+                if i['id']==id:
+                    return(i['m'])
     def bowlers_nb(self,id,max_ovr,mid):
-        while(True):
-            data=self.scorecard(mid)
-            if data["Innings"][0]['ovr']==max_ovr:
-                for i in (data["Innings"][0]['bowlers']):
-                    if i['id']==id:
-                        return(i['n'])
+        data=self.scorecard(mid)
+        if float(data["Innings"][0]['ovr'])==float(max_ovr)or data['state']=="complete":
+            for i in (data["Innings"][0]['bowlers']):
+                if i['id']==id:
+                    return(i['n'])
     def bowlers_wide(self,id,max_ovr,mid):
-        while(True):
-            data=self.scorecard(mid)
-            if data["Innings"][0]['ovr']==max_ovr:
-                for i in (data["Innings"][0]['bowlers']):
-                    if i['id']==id:
-                        return(i['n'])
+        data=self.scorecard(mid)
+        if float(data["Innings"][0]['ovr'])==float(max_ovr)or data['state']=="complete":
+            for i in (data["Innings"][0]['bowlers']):
+                if i['id']==id:
+                    return(i['n'])
     def Batsman_over(self,id,over,runs_prev,mid):
         while(True):
             data=self.scorecard(mid)
@@ -484,6 +470,9 @@ class asknplay:
 
 
     def decision(self,mid,q_id,db,dlink):
+        data=self.scorecard(mid)
+        if data["state"]=="preview":
+            return "Not applicable"
         ls=[]
         index=0
         df=self.Data_app()
@@ -499,16 +488,117 @@ class asknplay:
             if i==1:
                 if 2 in ls:
                     over=df.iloc[index]["Over"]
-                    if self.valid_Team_over(over,mid)==-1:
-                        return -1
-                    u="Questions/CRICKET/".format(q_id)
-                    print(u)
-                    db.child(u).child(q_id).update({"reviewed":"1"})
-
-                    runs=self.Team_run(over,-1,mid)
-                    return runs
+                    if float(data["Innings"][0]['ovr'])==float(over)-1:
+                        runs=self.Team_run(over,-1,mid)
+                        return runs
+                    else:
+                        return "Not applicable"
             elif i==2:
                 print("here") ##over
+
+                if 4 in ls:
+                    name=df.iloc[index]["Batsmen"]
+                    over=df.iloc[index]["Over"]
+                    id=self.id_gen(name,mid)
+                    if id==-1:
+                        print("b")
+                        return -1
+                    else:
+                        if 11 in ls:
+                            over=df.iloc[index]["Over"]
+                            if float(data["Innings"][0]['ovr'])==float(over)-1:
+                                return self.Batsmen_bound_over(id,over,mid)
+                            else:
+                                return "Not applicable"
+                        elif 12 in ls:
+                            over=df.iloc[index]["Over"]
+                            if float(data["Innings"][0]['ovr'])==float(over)-1:
+                                return self.Batsmen_six_over(id,over,mid)
+                            else:
+                                return "Not applicable"
+                        else:
+                            over=df.iloc[index]["Over"]
+                            if float(data["Innings"][0]['ovr'])==float(over)-1:
+                                return self.Batsman_over(id,over,-1,mid)
+                            else:
+                                return "Not applicable"
+            elif i==3:
+                name=df.iloc[index]["Bowler"]
+                id=self.id_gen(name,mid)
+                if id==-1:
+                    return -1
+                max_ovr=self.max_over_gen(mid)
+                if 5 in ls:
+                    max_ovr=self.max_over_gen(mid)
+                    if float(data["Innings"][0]['ovr'])==float(max_ovr) or data['state']=="complete":
+                        return self.bowlers_wickets(id,max_ovr,mid)
+                    else:
+                        return "Not applicable"
+                elif 6 in ls:
+                    max_ovr=self.max_over_gen(mid)
+                    if float(data["Innings"][0]['ovr'])==float(max_ovr) or data['state']=="complete":
+                        return self.bowlers_maidens(id,max_ovr,mid)
+                    else:
+                        return "Not applicable"
+                elif 7 in ls:
+                    max_ovr=self.max_over_gen(mid)
+                    if float(data["Innings"][0]['ovr'])==float(max_ovr) or data['state']=="complete":
+                        return self.bowlers_wide(id,max_ovr,mid)
+                    else:
+                        return "Not applicable"
+                else:
+                    max_ovr=self.max_over_gen(mid)
+                    if float(data["Innings"][0]['ovr'])==float(max_ovr) or data['state']=="complete":
+                        return self.bowlers_nb(id,max_ovr,mid)
+                    else:
+                        return "Not applicable"
+            elif i==4:
+                name=df.iloc[index]["Batsmen"]
+                id=self.id_gen(name,mid)
+                print(id)
+                if id==-1:
+                    return -1
+                else:
+                    if 11 in ls:
+                        max_ovr=self.max_over_gen(mid)
+                        return self.Batsmen_bound(id,max_ovr,mid)
+                    elif 12 in ls:
+                        max_ovr=self.max_over_gen(mid)
+                        return self.Batsmen_six(id,max_ovr,mid)
+                    else:
+                        max_ovr=self.max_over_gen(mid)
+                        return self.Batsmen_runs(id,max_ovr,mid)
+            else:
+                continue
+
+
+    def reviewing(self,mid,q_id,db,dlink):
+        data=self.scorecard(mid)
+        ls=[]
+        index=0
+        df=self.Data_app()
+        print(df)
+        col=['q_id', 'Team','Over', 'Bowler', 'Batsmen', 'Bow_wickets',
+               'Maiden', 'Wide', 'Noball', 'Team_win', 'Team_run', 'Team_wickets',
+               'Boundaries', 'Sixes', 'Valid Before']
+        response=df.iloc[index].isnull()
+        for i in range(len(response)):
+            if(response[i]==False):
+                ls.append(i)
+        print(ls)
+        for i in ls:
+            if i==1:
+                if 2 in ls:
+                    if data["state"]=="preview":
+                        return 1
+                    over=df.iloc[index]["Over"]
+                    if self.valid_Team_over(over,mid)==-1:
+                        return -1
+                    else:
+                        return 1
+            elif i==2:
+                if data["state"]=="preview":
+                    return 1
 
                 if 4 in ls:
                     name=df.iloc[index]["Batsmen"]
@@ -520,38 +610,22 @@ class asknplay:
                     if self.valid_bat_over(id,over,mid)==-1:
                         return-1
                     else:
-                        u="Questions/CRICKET/".format(q_id)
-                        print(u)
-                        db.child(u).child(q_id).update({"reviewed":"1"})
-                        if 11 in ls:
-                            over=df.iloc[index]["Over"]
-                            return self.Batsmen_bound_over(id,over,mid)
-                        elif 12 in ls:
-                            return self.Batsmen_six_over(id,over,mid)
-                        else:
-                            max_ovr=self.max_over_gen(mid)
-                            print(id)
-                            return self.Batsman_over(id,over,-1,mid)
+                        return 1
             elif i==3:
+                if data["state"]=="preview":
+                    return 1
                 name=df.iloc[index]["Bowler"]
                 id=self.id_gen(name,mid)
                 if id==-1:
+                    print("bdhdjkah")
+                    u="Questions/CRICKET/".format(q_id)
+                    db.child(u).child(q_id).update({"reviewed":"-1"})
                     return -1
-                max_ovr=self.max_over_gen(mid)
-                u="Questions/CRICKET/".format(q_id)
-                print(u)
-                db.child(u).child(q_id).update({"reviewed":"1"})
-                if 5 in ls:
-                    return self.bowlers_wickets(id,max_ovr,mid)
-                elif 6 in ls:
-                    return self.bowlers_maidens(id,max_ovr,mid)
-                elif 7 in ls:
-                    return self.bowlers_wide(id,max_ovr,mid)
                 else:
-                    max_ovr=self.max_over_gen(mid)
-                    print(max_ovr)
-                    return self.bowlers_nb(id,"100",mid)
+                    return 1
             elif i==4:
+                if data["state"]=="preview":
+                    return 1
                 name=df.iloc[index]["Batsmen"]
                 id=self.id_gen(name,mid)
                 print(id)
@@ -561,82 +635,67 @@ class asknplay:
                 if self.valid_bat(id,mid)==-1:
                     return -1
                 else:
-                    u="Questions/CRICKET/".format(q_id)
-                    print(u)
-                    db.child(u).child(q_id).update({"reviewed":"1"})
-                    if 11 in ls:
-                        max_ovr=self.max_over_gen(mid)
-                        self.Batsmen_bound(id,max_ovr,mid)
-                    elif 12 in ls:
-                        max_ovr=self.max_over_gen(mid)
-                        self.Batsmen_six(id,max_ovr,mid)
-                    else:
-                        max_ovr=self.max_over_gen(mid)
-                        self.Batsmen_runs(id,max_ovr,mid)
+                    return 1
             else:
                 continue
 
 
-def main(event):
-    a=asknplay()
-    config = {
-          "apiKey": "apiKey",
-          "authDomain":"geographicindicationspl.firebaseapp.com" ,
-          "databaseURL": "https://geographicindicationspl.firebaseio.com/",
-          "storageBucket":"geographicindicationspl.appspot.com/",
-          #"serviceAccount": "path/to/serviceAccountCredentials.json"
-        }
 
-    firebase = pyrebase.initialize_app(config)
-        #storage.child("example.jpeg").put("thumbDiv.jpeg")
-    db = firebase.database()
-        #db.child("users").set({1:"example.jpeg"})
-    users = db.child("Questions/CRICKET").get()
-    dlink=users.val()
-    key=[]
-    for i in dlink:
-        key.append(i)
-    q_id=key[-1]
-    print(dlink[q_id]['reviewed'])
-    if dlink[q_id]['reviewed']=="2" or dlink[q_id]['reviewed']=="-1":
-        print("aa")
-        return
-    print(q_id)
-    question=(dlink[q_id]['content'])
-    match_id=(dlink[q_id]['matchid'])
-    df=a.Q_analsys(question,q_id)
-    result=a.decision(match_id,q_id,db,dlink)
-    print(result)
-    if result==-1:
-        u="Questions/CRICKET/".format(q_id)
-        print(u)
-        db.child(u).child(q_id).update({"reviewed":"-1"})
-    else:
-        u="Questions/CRICKET/".format(q_id)
-        print(u)
-        db.child(u).child(q_id).update({"reviewed":"2"})
-        url="https://enigmatic-hamlet-61462.herokuapp.com/submitSolution/{}/{}".format(int(q_id),int(result))
-        res=requests.get(url)
-        hash_i=(res.text)
-        print(hash_i)
-        return 0
+def main():
+    while(True):
+        time.sleep(10)
+        a=asknplay()
+        config = {
+              "apiKey": "apiKey",
+              "authDomain":"geographicindicationspl.firebaseapp.com" ,
+              "databaseURL": "https://geographicindicationspl.firebaseio.com/",
+              "storageBucket":"geographicindicationspl.appspot.com/",
+              #"serviceAccount": "path/to/serviceAccountCredentials.json"
+            }
 
-
-def fire():
-    firebase_admin.db.reference('Questions/CRICKET').listen(main)
-config = {
-                  "apiKey": "apiKey",
-                  "authDomain":"geographicindicationspl.firebaseapp.com" ,
-                  "databaseURL": "https://geographicindicationspl.firebaseio.com/",
-                  "storageBucket":"geographicindicationspl.appspot.com/",
-                  #"serviceAccount": "path/to/serviceAccountCredentials.json"
-                  }
-cred = credentials.Certificate("C:/Users/PIYUSH/Desktop/Desportivos/code/geographicindicationspl-firebase-adminsdk-fs115-869a219ea1.json")
-firebase_admin.initialize_app(cred,options=config)
-t1 = threading.Thread(target=fire)
-t1.start()
-time.sleep(50)
-t2=threading.Thread(target=fire)
-t2.start()
-t1.join()
-t2.join()
+        firebase = pyrebase.initialize_app(config)
+            #storage.child("example.jpeg").put("thumbDiv.jpeg")
+        db = firebase.database()
+            #db.child("users").set({1:"example.jpeg"})
+        users = db.child("Questions/CRICKET").get()
+        dlink=users.val()
+        key=[]
+        for i in dlink:
+            key.append(i)
+        q_id=key
+        for i in q_id:
+            print(dlink[i]['reviewed'])
+            if dlink[i]['reviewed']=="1":
+                print(i)
+                question=(dlink[i]['content'])
+                match_id=(dlink[i]['matchid'])
+                df=a.Q_analsys(question,i)
+                result=a.decision(match_id,i,db,dlink)
+                if result==-1:
+                    u="Questions/CRICKET/".format(i)
+                    db.child(u).child(i).update({"reviewed":"-1"})
+                elif result=="Not applicable":
+                    continue
+                else:
+                    u="Questions/CRICKET/".format(q_id)
+                    db.child(u).child(i).update({"reviewed":"2"})
+                    url="https://enigmatic-hamlet-61462.herokuapp.com/submitSolution/{}/{}".format(int(i),int(result))
+                    res=requests.get(url)
+                    hash_i=(res.text)
+            elif dlink[i]['reviewed']=="0":
+                print(i)
+                print("maaaa")
+                question=(dlink[i]['content'])
+                match_id=(dlink[i]['matchid'])
+                df=a.Q_analsys(question,i)
+                result=a.reviewing(match_id,i,db,dlink)
+                if result==-1:
+                    print("t")
+                    u="Questions/CRICKET/".format(i)
+                    db.child(u).child(i).update({"reviewed":"-1"})
+                else:
+                    u="Questions/CRICKET/".format(i)
+                    db.child(u).child(i).update({"reviewed":"1"})
+            else:
+                continue
+main()
